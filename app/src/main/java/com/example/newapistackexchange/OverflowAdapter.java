@@ -3,6 +3,7 @@ package com.example.newapistackexchange;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -29,14 +30,6 @@ public class OverflowAdapter extends ArrayAdapter<Overflow> {
     private LayoutInflater inflater;
     private String imageUrls;
 
-    public ImageListAdapter(Context context, String imageUrls) {
-        super(context, R.layout.overflow_list, imageUrls);
-
-        this.context = context;
-        this.imageUrls = imageUrls;
-
-        inflater = LayoutInflater.from(context);
-    }
 
     public OverflowAdapter(@NonNull Context context, @NonNull List<Overflow> overflows) {
         super(context, 0, overflows);
@@ -58,6 +51,12 @@ public class OverflowAdapter extends ArrayAdapter<Overflow> {
 
         TextView Ans_count = (TextView) view.findViewById(R.id.ans_count);
         Ans_count.setText(String.valueOf(current.getAns_count()));
+        int Answer_count=Integer.valueOf(current.getAns_count());
+        if(Answer_count!=0){
+            view.setBackgroundColor(Color.parseColor("#008000"));
+        }
+        else
+            view.setBackgroundColor(Color.parseColor("#FF0000"));
 
         TextView name = (TextView) view.findViewById(R.id.name);
         name.setText(String.valueOf(current.getDisplay_name()));
@@ -80,7 +79,7 @@ public class OverflowAdapter extends ArrayAdapter<Overflow> {
         TextView datela = (TextView) view.findViewById(R.id.last_act_date);
         datela.setText(formatDate(date_l_a));
 
-        imageUrls=String.valueOf(current.getImage_link());
+        /*imageUrls=String.valueOf(current.getImage_link());
         ImageView profile = (ImageView) view.findViewById(R.id.image_view);
 
         Picasso.with(context)
@@ -89,6 +88,7 @@ public class OverflowAdapter extends ArrayAdapter<Overflow> {
                 .fit()
                 .into(profile)
                 .setLoggingEnabled(true);
+        */
 
         return view;
     }
